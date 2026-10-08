@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Classroom – Online Course Management | Expanded LMS</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700&family=Manrope:wght@400;600;700&display=swap">
+<style>
+:root{--bg:#070817;--card:rgba(255,255,255,.055);--br:rgba(255,255,255,.12);--tx:#eef0ff;--mu:#a0a8d6;--p:#8b5cf6;--c:#22d3ee;--am:#fbbf24;--ok:#34d399;--bad:#fb7185;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{background:var(--bg);scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;color:var(--tx);font:16px/1.6 Manrope,system-ui,sans-serif;min-height:100vh}
+body::before{content:"";position:fixed;inset:-20%;z-index:-1;background:radial-gradient(40% 35% at 20% 15%,rgba(139,92,246,.38),transparent),radial-gradient(35% 30% at 85% 25%,rgba(34,211,238,.26),transparent),radial-gradient(40% 40% at 60% 95%,rgba(251,113,133,.2),transparent);animation:dr 24s ease-in-out infinite alternate}
+@keyframes dr{to{transform:translate(4%,3%) rotate(6deg)}}
+.zoomable{transition:transform .22s ease,box-shadow .22s ease,filter .22s ease!important;transform-origin:center}
+.zoomable:hover{transform:scale(1.045) translateY(-2px)!important;filter:saturate(1.08);z-index:2}
+nav a.zoomable:hover{transform:scale(1.10)!important}
+.btn.zoomable:hover,button.zoomable:hover{transform:scale(1.07) translateY(-2px)!important}
+input.zoomable:hover,select.zoomable:hover,textarea.zoomable:hover{transform:scale(1.018)!important}
+.cursor-glow{position:fixed;pointer-events:none;width:180px;height:180px;border-radius:50%;z-index:0;opacity:.18;filter:blur(35px);background:radial-gradient(circle,var(--c),transparent 65%);transform:translate(-50%,-50%);transition:left .08s linear,top .08s linear}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.zoomable:hover{transform:none!important}}
+h1,h2,h3{font-family:Unbounded,system-ui,sans-serif;line-height:1.2;margin:0 0 .6rem;font-weight:700}h2{font-size:clamp(20px,3vw,28px)}h3{font-size:17px}
+a{cursor:pointer}nav{display:flex;align-items:center;gap:16px;padding:12px 22px;background:rgba(7,8,23,.65);backdrop-filter:blur(16px);border-bottom:1px solid var(--br);position:sticky;top:env(safe-area-inset-top,0px);z-index:5;flex-wrap:wrap}
+nav a{color:var(--tx);text-decoration:none;font-weight:600}.logo{font:700 19px Unbounded,sans-serif;color:var(--c)!important}.sp{flex:1}
+main{max-width:1100px;margin:0 auto;padding:22px}
+.hero2{position:relative;overflow:hidden;border:1px solid var(--br);border-radius:28px;min-height:440px;margin-bottom:26px;background:rgba(10,12,34,.55)}
+.hero2 canvas{position:absolute;inset:0;width:100%;height:100%}.ht{position:relative;padding:46px 34px;max-width:560px;pointer-events:none}.ht a,.ht button{pointer-events:auto}
+.ht h1{font-size:clamp(30px,5.4vw,54px);background:linear-gradient(110deg,#fff,var(--c) 70%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ht p{color:var(--mu);max-width:46ch}
+.btn,button{background:linear-gradient(120deg,var(--p),#6366f1 55%,var(--c));color:#fff;border:0;border-radius:12px;padding:11px 18px;font:700 15px Manrope,sans-serif;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 8px 24px -8px rgba(139,92,246,.7)}
+.btn.sm{padding:6px 13px;font-size:14px}.btn.alt{background:transparent;color:var(--c);border:1.5px solid var(--c);box-shadow:none}.btn.bad{background:var(--bad);color:#2a0710;box-shadow:none}.btn.am{background:var(--am);color:#2a1d00;box-shadow:0 8px 24px -8px rgba(251,191,36,.6)}
+button.ic{background:transparent;box-shadow:none;border:1px solid var(--br)}:focus-visible{outline:3px solid var(--am);outline-offset:2px}
+input,select,textarea{width:100%;padding:11px 13px;border:1px solid var(--br);border-radius:12px;background:rgba(255,255,255,.07);color:var(--tx);font:inherit;margin:4px 0 13px}option{color:#111}
+label{font-weight:600;font-size:14px;color:var(--mu)}.pw{position:relative}.pw input{padding-right:78px}.eye{position:absolute;right:6px;top:8px;padding:5px 12px;background:rgba(255,255,255,.12);box-shadow:none;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}.g3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:var(--card);border:1px solid var(--br);border-radius:20px;padding:18px;backdrop-filter:blur(14px)}
+.cc{padding:0;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}.cc:hover{transform:translateY(-4px);box-shadow:0 0 40px -12px var(--p)}.cc .top{height:104px;display:grid;place-items:center;font-size:44px;background-image:radial-gradient(circle at 70% 20%,rgba(255,255,255,.35),transparent 55%)}.cc .bd{padding:16px;flex:1;display:flex;flex-direction:column;gap:6px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 18px}.chip{padding:7px 16px;border-radius:99px;border:1px solid var(--br);background:var(--card);font-weight:600;font-size:14px;cursor:pointer}.chip.on{background:var(--c);color:#031a1f;border-color:var(--c)}
+.badge{font-size:12px;font-weight:700;padding:2px 11px;border-radius:99px;background:rgba(255,255,255,.12);color:var(--mu)}.badge.ok{background:var(--ok);color:#052e1d}.badge.wait{background:var(--am);color:#2a1d00}
+.bar{height:9px;background:rgba(255,255,255,.1);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--c),var(--ok))}
+.mu{color:var(--mu);font-size:14px}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.learn{display:grid;grid-template-columns:270px 1fr;gap:18px}@media(max-width:760px){.learn{grid-template-columns:1fr}}
+.les{display:flex;gap:8px;padding:9px 11px;border-radius:11px;cursor:pointer;font-weight:600}.les.on{background:rgba(139,92,246,.22);outline:1px solid var(--p)}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--br);font-size:14px}th{color:var(--mu)}.sc{overflow-x:auto}
+.tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}.tabs a{padding:8px 14px;border-radius:11px;background:var(--card);border:1px solid var(--br);font-weight:600;color:var(--tx)}.tabs a.on{background:var(--p)}
+.sky{margin-bottom:16px;padding:8px}.sky svg{width:100%;height:auto}.st{fill:#252a58;stroke:#6b73b8;stroke-width:2}.st.on{fill:var(--am);stroke:#fff;filter:drop-shadow(0 0 9px var(--am))}
+.cert{text-align:center;padding:44px 20px;border-radius:12px;border:8px double var(--am);background:rgba(255,255,255,.06)}.cert h1{font-size:36px;color:var(--c)}
+.sec{margin:34px 0 14px}.ft{font-size:30px}.av{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font:700 16px Unbounded;background:linear-gradient(135deg,var(--p),var(--c));margin-bottom:8px}.arch{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.arch .card{flex:1;min-width:170px;text-align:center}.demo{cursor:pointer}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--tx);color:#0b0d24;padding:10px 18px;border-radius:12px;z-index:9;font-weight:600}
+
+/* PROFESSIONAL CERTIFICATE */
+.cert-wrap{max-width:1080px;margin:18px auto}
+.prof-cert{position:relative;overflow:hidden;min-height:650px;padding:58px 70px;border:14px solid #c9a227;border-radius:4px;background:radial-gradient(circle at 15% 20%,rgba(201,162,39,.10),transparent 24%),radial-gradient(circle at 85% 80%,rgba(139,92,246,.09),transparent 25%),linear-gradient(135deg,#fffdf5,#f8f4e7 48%,#fff);color:#172033;box-shadow:0 24px 70px rgba(0,0,0,.35);font-family:Georgia,"Times New Roman",serif}
+.prof-cert:before{content:"";position:absolute;inset:16px;border:2px solid #c9a227;pointer-events:none}
+.prof-cert:after{content:"";position:absolute;inset:27px;border:1px solid rgba(201,162,39,.55);pointer-events:none}
+.cert-inner{position:relative;z-index:1;text-align:center;min-height:510px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.cert-brand{font-family:Manrope,Arial,sans-serif;letter-spacing:5px;font-size:13px;font-weight:800;color:#6b5210;text-transform:uppercase}
+.cert-seal{width:82px;height:82px;border-radius:50%;display:grid;place-items:center;margin:16px auto 12px;border:5px double #c9a227;color:#6b5210;font-family:Manrope,Arial,sans-serif;font-weight:900;font-size:11px;letter-spacing:1px;background:rgba(201,162,39,.10)}
+.cert-title{font-size:52px!important;letter-spacing:3px!important;color:#15213b!important;margin:5px 0 10px!important}
+.cert-subtitle{font-family:Manrope,Arial,sans-serif;color:#667085;font-size:14px;letter-spacing:2px;text-transform:uppercase}
+.cert-student{font-size:42px;font-weight:700;color:#111827;margin:14px 0 4px;border-bottom:2px solid #c9a227;padding:0 30px 8px}
+.cert-copy{font-family:Manrope,Arial,sans-serif;font-size:15px;color:#4b5563;margin:8px 0}
+.cert-course{font-size:29px;font-weight:700;color:#26365c;margin:8px 0 18px}
+.cert-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;width:82%;margin-top:20px;padding-top:18px;border-top:1px solid #d6c78f}
+.cert-meta b{display:block;font-family:Manrope,Arial,sans-serif;font-size:13px;color:#172033}
+.cert-meta span{font-family:Manrope,Arial,sans-serif;font-size:12px;color:#6b7280}
+.cert-sign{display:flex;justify-content:space-between;width:82%;margin-top:28px;font-family:Manrope,Arial,sans-serif;font-size:11px;color:#6b7280}
+.cert-sign div{min-width:180px;border-top:1px solid #9ca3af;padding-top:7px}
+.cert-note{font-family:Manrope,Arial,sans-serif;font-size:11px;color:#667085;margin-top:18px}
+.cert-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:18px 0}
+@media(max-width:760px){.prof-cert{padding:42px 24px;min-height:600px}.cert-title{font-size:32px!important}.cert-student{font-size:27px}.cert-course{font-size:21px}.cert-meta{grid-template-columns:1fr;gap:12px}.cert-sign{width:95%;gap:20px}}
+@media print{@page{size:A4 landscape;margin:0}body{background:#fff!important}.prof-cert{width:100vw;height:100vh;min-height:100vh;border-width:14px;box-shadow:none;border-radius:0}.noprint,nav,.toast,.cursor-glow{display:none!important}main{max-width:none!important;padding:0!important}.cert-wrap{max-width:none!important;margin:0!important}}
+
+@media print{nav,.noprint{display:none!important}html,body{background:#fff!important;color:#000}.cert{border-color:#b8860b}.cert h1{color:#0f5c57}.mu{color:#444}}
+</style>
+</head><body>
+<nav id="nav"></nav><main id="app"></main>
+<script>
+const $=s=>document.querySelector(s),K='lms_classroom_v1';
+const esc=s=>String(s).replace(/[&<>"']/g,c=>'&#'+c.charCodeAt(0)+';');
+const hs=s=>{let x=5381;for(const c of s)x=(x*33^c.charCodeAt(0))>>>0;return x.toString(36)};
+const nid=()=>Math.random().toString(36).slice(2,9);
+const EM={
+  Web:'🌐',Programming:'🐍',CSE:'🧮',Design:'🎨',Security:'🔐',
+  Cloud:'☁️',DevOps:'⚙️',Database:'🗄️',AI:'🤖',Data:'📊',
+  Linux:'🐧',Networking:'🌐',Mobile:'📱',Testing:'🧪',Tools:'🛠️'
+},
+CL=['#0f5c57','#b5651d','#3b4f9a','#8a2f5b','#2f6b3a','#5b3a9a','#176b87','#7a4e00'];
+let D,me=null,V={n:'home'},L=0,Q='',CAT='All';
+function seed(){
+ const mk=(t,cat,d,l,q)=>({id:nid(),title:t,cat,desc:d,by:'u2',status:'approved',lessons:l.map(x=>({t:x,notes:x+': the key ideas, a worked example and a short practice task to try on your own.',url:''})),quiz:q.map(x=>({q:x[0],o:x[1],a:x[2]}))});
+ const U=(id,name,email,pw,role)=>({id,name,email,pw:hs(pw),role});
+ return{users:[U('u1','Admin','admin@demo.com','admin123','admin'),U('u2','Dr. Rao','teacher@demo.com','teach123','instructor'),U('u3','Asha','student@demo.com','learn123','student')],
+ courses:[
+ mk('Web Development Basics','Web','Build your first responsive web pages with HTML, CSS and JavaScript.',['HTML structure','CSS layout','JavaScript basics'],[['Which tag makes a link?',['<a>','<p>','<div>'],0],['CSS stands for?',['Cascading Style Sheets','Computer Style Sheets','Creative Style System'],0],['Which runs in the browser?',['JavaScript','SQL','Bash'],0]]),
+ mk('Python for Beginners','Programming','Learn variables, loops and functions by writing small programs.',['Variables and types','Loops','Functions'],[['Which keyword defines a function?',['def','func','fun'],0],['Output of 2**3?',['6','8','9'],1],['Lists are written with?',['[ ]','{ }','< >'],0]]),
+ mk('Data Structures','CSE','Arrays, stacks, queues and trees explained with simple examples.',['Arrays and lists','Stacks and queues','Trees'],[['A stack follows?',['LIFO','FIFO','Random'],0],['A queue follows?',['LIFO','FIFO','Sorted'],1],['Root belongs to a?',['Tree','Stack','Array'],0]]),
+ mk('UI/UX Design Fundamentals','Design','Design clear, friendly interfaces people enjoy using.',['Layout and spacing','Colour and type','Usability testing'],[['UX focuses on?',['User experience','Server speed','Database'],0],['Good contrast helps?',['Readability','Nothing','Hosting'],0],['A prototype is a?',['Early model','Final product','Bug'],0]]),
+ mk('AWS Cloud Fundamentals','Cloud','Understand AWS core services, cloud concepts, IAM, EC2, S3 and VPC.',['Cloud concepts','EC2 and S3','IAM and VPC'],[['Which service provides virtual servers?',['EC2','S3','Route 53'],0],['S3 is mainly for?',['Object storage','Virtual machines','DNS only'],0],['IAM controls?',['Identity and access','Video streaming','Code formatting'],0]]),
+ mk('DevOps with Docker','DevOps','Learn containers, images, Dockerfiles, Compose and practical deployment workflows.',['Docker basics','Images and containers','Docker Compose'],[['Docker packages applications into?',['Containers','Databases','DNS zones'],0],['A Dockerfile is used to?',['Build an image','Create a domain','Store passwords'],0],['Docker Compose manages?',['Multi-container apps','Only CSS','Only Git branches'],0]]),
+ mk('Kubernetes Essentials','DevOps','Deploy and manage containerized applications with Kubernetes fundamentals.',['Pods and deployments','Services','ConfigMaps and Secrets'],[['The smallest deployable Kubernetes unit is a?',['Pod','Node','Cluster'],0],['A Service provides?',['Stable network access','Source code','A database schema'],0],['A Deployment manages?',['Replica Pods','Git commits','Emails'],0]]),
+ mk('Git & GitHub Masterclass','Tools','Master version control, branches, pull requests and collaborative GitHub workflows.',['Git basics','Branches and merges','GitHub collaboration'],[['Which command creates a repository?',['git init','git run','git start'],0],['A branch is used to?',['Develop independently','Delete Git','Host a database'],0],['GitHub is mainly a?',['Code collaboration platform','Programming language','Cloud database'],0]]),
+ mk('SQL & Database Basics','Database','Learn tables, queries, joins, filtering, aggregation and database design.',['Tables and SELECT','WHERE and JOIN','GROUP BY'],[['SQL is used to?',['Query databases','Style pages','Build containers'],0],['Which keyword filters rows?',['WHERE','GROUP','ORDERBY'],0],['JOIN combines?',['Related table data','Images','CSS files'],0]]),
+ mk('Cybersecurity Fundamentals','Security','Learn security basics, common threats, authentication and safe network practices.',['Security concepts','Threats and attacks','Defensive practices'],[['Phishing is mainly a form of?',['Social engineering','Compression','Database indexing'],0],['A strong password should be?',['Long and unique','Short and reused','Public'],0],['MFA adds?',['Another verification factor','More storage','A new programming language'],0]]),
+ mk('Linux Administration','Linux','Build practical Linux skills with files, permissions, processes, networking and shell commands.',['Linux filesystem','Users and permissions','Processes and networking'],[['Which command lists files?',['ls','cd','pwdx'],0],['chmod changes?',['Permissions','Hostname','Disk format'],0],['Which tool shows running processes?',['ps','mkdir','touch'],0]]),
+ mk('Data Analytics with Python','Data','Explore data using Python, Pandas, charts and practical analysis techniques.',['Pandas basics','Data cleaning','Visualization'],[['Pandas is used for?',['Data analysis','Web hosting','Container orchestration'],0],['A DataFrame is?',['Tabular data structure','A Linux command','A network cable'],0],['Charts help to?',['Visualize patterns','Encrypt passwords','Compile code'],0]]),
+ mk('Machine Learning Foundations','AI','Understand supervised learning, features, models, evaluation and practical ML workflows.',['ML concepts','Training models','Evaluation'],[['A feature is?',['An input variable','A password','A server port'],0],['Training data is used to?',['Learn model patterns','Deploy DNS','Create HTML'],0],['Accuracy measures?',['Correct predictions ratio','CPU temperature','Network speed'],0]]),
+ mk('Generative AI Essentials','AI','Learn prompts, LLM concepts, responsible AI and practical generative AI workflows.',['Generative AI concepts','Prompt engineering','Responsible AI'],[['LLM stands for?',['Large Language Model','Local Linux Machine','Long Link Manager'],0],['A prompt is?',['Instruction/input to a model','A database table','A network cable'],0],['Responsible AI considers?',['Safety and fairness','Only colors','Only storage'],0]]),
+ mk('Azure Cloud Basics','Cloud','Get started with Azure compute, storage, identity and core cloud services.',['Azure concepts','Compute and storage','Identity'],[['Azure is a?',['Cloud platform','Database language','Text editor'],0],['Blob Storage stores?',['Objects','Git branches','CPU instructions'],0],['Azure identity is managed with?',['Microsoft Entra ID','Docker','Nginx'],0]]),
+ mk('Networking Fundamentals','Networking','Understand IP addressing, DNS, HTTP, ports, routing and basic troubleshooting.',['IP and ports','DNS and HTTP','Routing basics'],[['DNS maps names to?',['IP addresses','Passwords','Files'],0],['HTTP commonly uses port?',['80','22','3306'],0],['An IP address identifies?',['A network interface/host','A CSS class','A Git commit'],0]]),
+ mk('Software Testing Basics','Testing','Learn test cases, unit testing, integration testing and practical quality workflows.',['Testing concepts','Test cases','Automation basics'],[['Unit tests test?',['Small units of code','Entire companies','DNS records'],0],['A test case contains?',['Steps and expected result','Only a logo','A database password'],0],['Automation helps make testing?',['Repeatable','Impossible','Manual only'],0]]),
+ mk('Terraform Infrastructure as Code','Tools','Provision cloud infrastructure using Terraform, providers, resources and reusable modules.',['Terraform basics','Resources and state','Modules'],[['Terraform is used for?',['Infrastructure as Code','Video editing','Email marketing'],0],['Terraform state tracks?',['Managed infrastructure','Browser history','Passwords'],0],['A module helps with?',['Reusable infrastructure','CSS animation','Video playback'],0]]),
+ mk('Mobile App Development Basics','Mobile','Explore mobile UI concepts, APIs, navigation and application architecture.',['Mobile UI','Navigation','APIs and storage'],[['A mobile UI should be?',['Responsive to touch','Only desktop-sized','Text-only'],0],['An API allows apps to?',['Communicate with services','Change CPU voltage','Format disks'],0],['Local storage can keep?',['Application data','Cloud DNS records only','Source control history'],0]])
+ ],
+ enrol:[],log:[{m:'Platform ready',t:new Date().toLocaleString()}]}}
+function load(){
+ try{D=JSON.parse(localStorage.getItem(K))}catch(e){}
+ if(!D)D=seed();
+ if(!Array.isArray(D.courses))D.courses=[];
+ const fresh=seed().courses;
+ fresh.forEach(fc=>{if(!D.courses.some(c=>c.title===fc.title))D.courses.push(fc)});
+ try{me=D.users.find(u=>u.id===localStorage.getItem(K+'me'))||null}catch(e){}
+ D.certificates=D.certificates||[];
+ if(me){
+  D.enrol.filter(e=>e.u===me.id).forEach(e=>{
+   const c=C(e.c);
+   if(c&&certOK(e,c))issueCertificate(e,c);
+  });
+ }
+ save();
+}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(D))}catch(e){}};
+const log=m=>{D.log.unshift({m,t:new Date().toLocaleString()});D.log=D.log.slice(0,25)};
+const T=m=>{const t=document.createElement('div');t.className='toast';t.textContent=m;document.body.appendChild(t);setTimeout(()=>t.remove(),2400)};
+const go=(n,p)=>{V={n,p};render();scrollTo(0,0)};
+const C=id=>D.courses.find(c=>c.id===id),E=(u,c)=>D.enrol.find(e=>e.u===u&&e.c===c),UN=id=>(D.users.find(u=>u.id===id)||{name:'Unknown'}).name;
+const pct=(e,c)=>Math.round((e.done.length+(e.passed?1:0))/(c.lessons.length+1)*100);
+
+const certOK=(e,c)=>!!(e&&c&&Array.isArray(e.done)&&e.done.length===c.lessons.length&&e.passed);
+
+function certificateNumber(student,course){
+  return 'CA-'+String(hs(student.id+'|'+course.id+'|'+course.title)).toUpperCase().padStart(8,'0');
+}
+
+function issueCertificate(enrolment,course){
+  if(!me || !enrolment || !course || !certOK(enrolment,course)) return null;
+
+  D.certificates=D.certificates||[];
+
+  if(enrolment.certificate){
+    return enrolment.certificate;
+  }
+
+  const cert={
+    id:certificateNumber(me,course),
+    issuedAt:new Date().toISOString(),
+    studentName:me.name,
+    courseTitle:course.title,
+    instructor:UN(course.by),
+    score:enrolment.score
+  };
+
+  enrolment.certificate=cert;
+
+  if(!D.certificates.some(x=>x.id===cert.id)){
+    D.certificates.push({
+      id:cert.id,
+      student:me.id,
+      course:course.id,
+      issuedAt:cert.issuedAt,
+      score:cert.score
+    });
+  }
+
+  log(me.name+' earned certificate for '+course.title);
+  save();
+  return cert;
+}
+
+const theme=()=>{const r=document.documentElement;r.dataset.theme=(r.dataset.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'))==='dark'?'light':'dark'};
+function render(){
+ $('#nav').innerHTML=`<a class="logo" onclick="go('home')">🎓 Classroom</a><span class="sp"></span><a onclick="go('home')">Courses</a>${me?`<a onclick="go('dash')">Dashboard</a><span class="badge">${me.role}</span><a onclick="out()">Log out</a>`:`<a class="btn sm" onclick="go('auth','login')">Log in</a>`}<button class="ic" aria-label="Toggle theme" onclick="theme()">◐</button>`;
+ $('#app').innerHTML=(VIEWS[V.n]||VIEWS.home)(V.p)}
+function out(){me=null;try{localStorage.removeItem(K+'me')}catch(e){}go('home')}
+/* ---- auth ---- */
+function login(){const u=D.users.find(u=>u.email===$('#e').value.trim().toLowerCase()&&u.pw===hs($('#p').value));if(!u)return T('Wrong email or password');me=u;try{localStorage.setItem(K+'me',u.id)}catch(e){}log(u.name+' logged in');save();go('dash')}
+function signup(){const n=$('#n').value.trim(),e=$('#e').value.trim().toLowerCase(),p=$('#p').value;if(!n||!e.includes('@')||p.length<6)return T('Enter a name, valid email and 6+ character password');if(D.users.some(u=>u.email===e))return T('That email already has an account');const u={id:nid(),name:n,email:e,pw:hs(p),role:$('#r').value};D.users.push(u);me=u;try{localStorage.setItem(K+'me',u.id)}catch(x){}log(n+' joined as '+u.role);save();go('dash')}
+function reset(){const u=D.users.find(u=>u.email===$('#e').value.trim().toLowerCase());if(!u||$('#p').value.length<6)return T('Use a registered email and a 6+ character password');u.pw=hs($('#p').value);save();T('Password updated. Log in now.');go('auth','login')}
+/* ---- learner actions ---- */
+function enroll(id){if(!me)return go('auth','login');if(!E(me.id,id)){D.enrol.push({u:me.id,c:id,done:[],score:null,passed:false});log(me.name+' enrolled in '+C(id).title);save()}L=0;go('learn',id)}
+function unenroll(id){if(!confirm('Leave this course? Your progress will be removed.'))return;D.enrol=D.enrol.filter(e=>!(e.u===me.id&&e.c===id));save();go('dash')}
+function tog(id,i){
+ const e=E(me.id,id),c=C(id),k=e.done.indexOf(i);
+ k<0?e.done.push(i):e.done.splice(k,1);
+ let issued=false;
+ if(certOK(e,c)){issueCertificate(e,c);issued=true}
+ save();
+ if(issued)T('Course completed 🎓 Professional certificate generated!');
+ render()
+}
+function sub(id){const c=C(id),e=E(me.id,id);let s=0;c.quiz.forEach((q,i)=>{const r=document.querySelector(`input[name=q${i}]:checked`);if(r&&+r.value===q.a)s++});e.score=Math.round(s/c.quiz.length*100);e.passed=e.score>=60;
+if(e.passed){
+ const certificate=issueCertificate(e,c);
+ save();
+ T(certificate?'Quiz passed 🎉 Certificate generated!':'Quiz passed 🎉');
+}else{
+ save();
+ T('Score '+e.score+'%. You need 60% to pass');
+}
+render()}
+/* ---- instructor / admin ---- */
+function addCourse(){const t=$('#t').value.trim();if(!t)return T('Add a course title');D.courses.push({id:nid(),title:t,cat:$('#c').value.trim()||'General',desc:$('#d').value.trim()||'New course',by:me.id,status:me.role==='admin'?'approved':'pending',lessons:[],quiz:[]});log(me.name+' created '+t);save();T(me.role==='admin'?'Course published':'Sent to admin for approval');render()}
+function addLesson(id){const t=$('#lt').value.trim();if(!t)return T('Add a lesson title');C(id).lessons.push({t,notes:$('#ln').value.trim()||'No notes yet.',url:$('#lu').value.trim()});save();render()}
+function addQ(id){const q=$('#qq').value.trim(),o=[1,2,3].map(i=>$('#o'+i).value.trim()).filter(Boolean);if(!q||o.length<2)return T('Add a question and at least 2 options');C(id).quiz.push({q,o,a:Math.min(+$('#qa').value-1,o.length-1)});save();render()}
+const delL=(id,i)=>{C(id).lessons.splice(i,1);D.enrol.forEach(e=>{if(e.c===id)e.done=e.done.filter(x=>x!==i).map(x=>x>i?x-1:x)});save();render()};
+const delQ=(id,i)=>{C(id).quiz.splice(i,1);save();render()};
+const setSt=(id,s)=>{C(id).status=s;log(C(id).title+' '+s);save();render()};
+function rmCourse(id){if(!confirm('Remove this course and all enrolments?'))return;D.courses=D.courses.filter(c=>c.id!==id);D.enrol=D.enrol.filter(e=>e.c!==id);save();go('dash')}
+function rmUser(id){if(id===me.id)return T('You cannot remove yourself');if(!confirm('Remove this user?'))return;D.users=D.users.filter(u=>u.id!==id);D.enrol=D.enrol.filter(e=>e.u!==id);save();render()}
+/* ---- views ---- */
+const card=(c,i)=>`<div class="card cc zoomable"><div class="top" style="background:${CL[Math.abs([...c.cat].reduce((a,x)=>a+x.charCodeAt(0),0))%5]}">${EM[c.cat]||'📘'}</div><div class="bd"><span class="badge">${esc(c.cat)}</span><h3>${esc(c.title)}</h3><div class="mu">${esc(c.desc)}</div><div class="mu">${esc(UN(c.by))} · ${c.lessons.length} lessons</div><span class="sp"></span><a class="btn sm" onclick="go('course','${c.id}')">View course</a></div></div>`;
+function grid(){const q=Q.toLowerCase(),r=D.courses.filter(c=>c.status==='approved'&&(CAT==='All'||c.cat===CAT)&&(c.title+c.desc).toLowerCase().includes(q));$('#grid').innerHTML=r.length?r.map(card).join(''):'<p class="mu">No courses match. Try another word or category.</p>'}
+function setCat(c){CAT=c;render();grid()}
+const VIEWS={
+home(){const ap=D.courses.filter(c=>c.status==='approved'),cats=['All',...new Set(ap.map(c=>c.cat))];setTimeout(grid);
+ return`<div class="hero"><h1>Learn anything, track every step.</h1><p>Browse courses, enrol in one click, finish lessons and quizzes, and download your certificate.</p><div class="stats"><div><b>${ap.length}</b>courses</div><div><b>${D.users.filter(u=>u.role==='student').length}</b>students</div><div><b>${D.enrol.length}</b>enrolments</div></div>${me?'':`<p><a class="btn am" onclick="go('auth','signup')">Create free account</a></p>`}</div>
+ <input id="s" placeholder="Search courses" value="${esc(Q)}" oninput="Q=this.value;grid()" aria-label="Search courses"><div class="chips">${cats.map(c=>`<span class="chip ${c===CAT?'on':''}" onclick="setCat('${esc(c)}')">${esc(c)}</span>`).join('')}</div><div class="grid" id="grid"></div>`},
+auth(m){const t=`<div class="tabs"><a class="${m==='login'?'on':''}" onclick="go('auth','login')">Log in</a><a class="${m==='signup'?'on':''}" onclick="go('auth','signup')">Sign up</a><a class="${m==='reset'?'on':''}" onclick="go('auth','reset')">Reset password</a></div>`;
+ return`<div class="card" style="max-width:420px;margin:auto">${t}${m==='signup'?'<label>Full name</label><input id="n">':''}<label>Email</label><input id="e" type="email"><label>${m==='reset'?'New password':'Password'}</label><input id="p" type="password">${m==='signup'?'<label>I am a</label><select id="r"><option value="student">Student</option><option value="instructor">Instructor</option></select>':''}<button onclick="${m}()">${m==='login'?'Log in':m==='signup'?'Create account':'Save new password'}</button>${m==='login'?'<p class="mu">Demo logins: admin@demo.com / admin123 · teacher@demo.com / teach123 · student@demo.com / learn123</p>':''}</div>`},
+course(id){const c=C(id);if(!c)return VIEWS.home();const e=me&&E(me.id,id);
+ return`<a class="mu" onclick="go('home')">← All courses</a><div class="card" style="margin-top:8px"><span class="badge">${esc(c.cat)}</span> ${c.status!=='approved'?`<span class="badge wait">${c.status}</span>`:''}<h1>${esc(c.title)}</h1><p>${esc(c.desc)}</p><p class="mu">Instructor: ${esc(UN(c.by))} · ${c.lessons.length} lessons · ${c.quiz.length} quiz questions · Certificate on completion</p>
+ ${e?`<a class="btn" onclick="L=0;go('learn','${id}')">Continue learning (${pct(e,c)}%)</a>`:me&&me.role!=='student'?'<p class="mu">Log in as a student to enrol.</p>':c.status==='approved'?`<button onclick="enroll('${id}')">Enrol now</button>`:''}</div>
+ <h3 style="margin-top:18px">Lessons</h3>${c.lessons.map((l,i)=>`<div class="card" style="margin-bottom:8px">${i+1}. ${esc(l.t)}</div>`).join('')||'<p class="mu">Lessons are coming soon.</p>'}`},
+learn(id){const c=C(id),e=me&&E(me.id,id);if(!e)return VIEWS.course(id);const l=c.lessons[L]||c.lessons[0],ok=certOK(e,c);
+ return`<a class="mu" onclick="go('dash')">← Dashboard</a><h2>${esc(c.title)}</h2><div class="row"><div class="bar" style="flex:1"><i style="width:${pct(e,c)}%"></i></div><b>${pct(e,c)}%</b></div><br>
+ <div class="learn"><div class="card">${c.lessons.map((x,i)=>`<div class="les ${i===L?'on':''}" onclick="L=${i};render()">${e.done.includes(i)?'✅':'⭕'} ${esc(x.t)}</div>`).join('')}<div class="les" onclick="L=-1;render()">${e.passed?'✅':'📝'} Final quiz</div></div>
+ <div class="card">${L===-1?`<h3>Final quiz</h3>${e.score!==null?`<p>Last score: <b>${e.score}%</b> ${e.passed?'(passed)':'(not passed yet)'}</p>`:''}${c.quiz.length?c.quiz.map((q,i)=>`<p><b>${i+1}. ${esc(q.q)}</b></p>${q.o.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}" style="width:auto"> ${esc(o)}</label><br>`).join('')}`).join('')+`<br><button onclick="sub('${id}')">Submit quiz</button>`:'<p class="mu">No quiz yet.</p>'}`:l?`<h3>${esc(l.t)}</h3><p>${esc(l.notes)}</p>${l.url?`<p><a class="btn alt sm" href="${esc(l.url)}" target="_blank" rel="noopener">Open video</a></p>`:''}<button onclick="tog('${id}',${L})">${e.done.includes(L)?'Mark as not done':'Mark as complete'}</button>`:'<p class="mu">No lessons yet.</p>'}
+ ${ok?`<hr><a class="btn am" onclick="issueCertificate(E(me.id,'${id}'),C('${id}'));go('cert','${id}')">🏆 Get your certificate</a>`:'<p class="mu">Finish all lessons and pass the quiz (60%+) to earn your certificate.</p>'}<p><a class="mu" onclick="unenroll('${id}')">Leave course</a></p></div></div>`},
+cert(id){
+ const c=C(id),e=me&&E(me.id,id);
+ if(!certOK(e,c))return VIEWS.home();
+ const cert=issueCertificate(e,c),issuedDate=new Date(cert.issuedAt).toLocaleDateString('en-IN',{day:'2-digit',month:'long',year:'numeric'});
+ return`<div class="cert-wrap">
+  <div class="prof-cert" id="certificate">
+   <div class="cert-inner">
+    <div class="cert-brand">CLASSROOM • ONLINE LEARNING ACADEMY</div>
+    <div class="cert-seal">CERTIFIED<br>LEARNER</div>
+    <div class="cert-subtitle">Certificate of Completion</div>
+    <h1 class="cert-title">CERTIFICATE</h1>
+    <p class="cert-copy">This certificate is proudly presented to</p>
+    <div class="cert-student">${esc(cert.studentName)}</div>
+    <p class="cert-copy">for successfully completing the academic course</p>
+    <div class="cert-course">${esc(cert.courseTitle)}</div>
+    <p class="cert-copy">and demonstrating successful completion of all required lessons and the final assessment.</p>
+    <div class="cert-meta">
+     <div><b>ISSUE DATE</b><span>${issuedDate}</span></div>
+     <div><b>FINAL ASSESSMENT</b><span>${cert.score}%</span></div>
+     <div><b>CERTIFICATE ID</b><span>${esc(cert.id)}</span></div>
+    </div>
+    <div class="cert-sign"><div>Academic Department</div><div>${esc(cert.instructor)}<br>Course Instructor</div></div>
+    <div class="cert-note">Issued by Classroom Online Learning Academy • This certificate confirms successful course completion.</div>
+   </div>
+  </div>
+  <div class="cert-actions noprint">
+   <button class="btn am" onclick="print()">🏆 Download / Print Certificate</button>
+   <button class="btn alt" onclick="go('learn','${id}')">Back to Course</button>
+  </div>
+ </div>`},
+certificates(){
+ if(!me)return VIEWS.auth('login');
+ if(me.role!=='student')return VIEWS.dash();
+ const earned=D.enrol.filter(e=>e.u===me.id&&C(e.c)&&certOK(e,C(e.c)));
+ let html='<a class="mu" onclick="go(\'dash\')">← Dashboard</a><h2>My Certificates</h2>';
+ if(!earned.length){
+  html+='<div class="card"><h3>No certificates yet</h3><p class="mu">Complete every lesson and pass the final quiz with at least 60% to automatically receive a professional certificate.</p></div>';
+ }else{
+  html+='<div class="grid">';
+  earned.forEach(e=>{
+   const c=C(e.c),cert=issueCertificate(e,c),dt=new Date(cert.issuedAt).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});
+   html+='<div class="card zoomable"><div class="cert-seal" style="margin:0 0 12px;width:58px;height:58px">CERT</div><h3>'+esc(c.title)+'</h3><p class="mu">Awarded to '+esc(me.name)+'</p><p class="mu">Issued '+dt+'</p><p><span class="badge ok">Completed</span> <span class="badge">'+esc(cert.id)+'</span></p><button class="btn sm am" onclick="go(\'cert\',\''+c.id+'\')">View Certificate</button></div>';
+  });
+  html+='</div>';
+ }
+ return html;
+},
+ dash(){if(!me)return VIEWS.auth('login');return({student:VIEWS.stu,instructor:VIEWS.ins,admin:VIEWS.adm})[me.role]()},
+stu(){const my=D.enrol.filter(e=>e.u===me.id&&C(e.c));return`<h2>Hi ${esc(me.name)} 👋</h2><h3>My courses</h3>${my.length?`<div class="grid">${my.map(e=>{const c=C(e.c);return`<div class="card"><h3>${esc(c.title)}</h3><div class="bar"><i style="width:${pct(e,c)}%"></i></div><p class="mu">${pct(e,c)}% done · quiz ${e.score===null?'not taken':e.score+'%'}</p><a class="btn sm" onclick="L=0;go('learn','${c.id}')">Open</a> ${certOK(e,c)?`<a class="btn sm am" onclick="go('cert','${c.id}')">Certificate</a>`:''}</div>`}).join('')}</div>`:'<p class="mu">You have not enrolled yet. <a onclick="go(\'home\')"><b>Browse courses</b></a></p>'}`},
+ins(){const my=D.courses.filter(c=>c.by===me.id);return`<h2>Instructor dashboard</h2><div class="card"><h3>Create a course</h3><label>Title</label><input id="t"><label>Category</label><input id="c" placeholder="Web, Design, CSE…"><label>Description</label><textarea id="d" rows="2"></textarea><button onclick="addCourse()">Create course</button></div><h3 style="margin-top:18px">My courses</h3>${my.map(c=>{const en=D.enrol.filter(e=>e.c===c.id);return`<div class="card" style="margin-bottom:10px"><div class="row"><b>${esc(c.title)}</b><span class="badge ${c.status==='approved'?'ok':'wait'}">${c.status}</span><span class="sp"></span><a class="btn sm" onclick="go('manage','${c.id}')">Edit content</a></div><p class="mu">${en.length} students enrolled</p>${en.length?`<div class="sc"><table><tr><th>Student</th><th>Progress</th><th>Quiz</th></tr>${en.map(e=>`<tr><td>${esc(UN(e.u))}</td><td>${pct(e,c)}%</td><td>${e.score===null?'-':e.score+'%'}</td></tr>`).join('')}</table></div>`:''}</div>`}).join('')||'<p class="mu">No courses yet. Create your first one above.</p>'}`},
+manage(id){const c=C(id);if(!c||(c.by!==me.id&&me.role!=='admin'))return VIEWS.home();return`<a class="mu" onclick="go('dash')">← Dashboard</a><h2>${esc(c.title)}</h2><div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))"><div class="card"><h3>Lessons</h3>${c.lessons.map((l,i)=>`<p>${i+1}. ${esc(l.t)} <a class="mu" onclick="delL('${id}',${i})">remove</a></p>`).join('')}<label>Lesson title</label><input id="lt"><label>Notes</label><textarea id="ln" rows="3"></textarea><label>Video link (optional)</label><input id="lu" placeholder="https://"><button onclick="addLesson('${id}')">Add lesson</button></div><div class="card"><h3>Quiz</h3>${c.quiz.map((q,i)=>`<p>${i+1}. ${esc(q.q)} <a class="mu" onclick="delQ('${id}',${i})">remove</a></p>`).join('')}<label>Question</label><input id="qq"><label>Options</label><input id="o1" placeholder="Option 1"><input id="o2" placeholder="Option 2"><input id="o3" placeholder="Option 3 (optional)"><label>Correct option number</label><select id="qa"><option>1</option><option>2</option><option>3</option></select><button onclick="addQ('${id}')">Add question</button></div></div>`},
+adm(){const pend=D.courses.filter(c=>c.status==='pending');return`<h2>Admin dashboard</h2><div class="grid"><div class="card"><b style="font-size:28px">${D.users.length}</b><div class="mu">users</div></div><div class="card"><b style="font-size:28px">${D.courses.length}</b><div class="mu">courses</div></div><div class="card"><b style="font-size:28px">${D.enrol.length}</b><div class="mu">enrolments</div></div><div class="card"><b style="font-size:28px">${(D.certificates||[]).length}</b><div class="mu">certificates earned</div></div></div>
+ <h3 style="margin-top:18px">Courses</h3><div class="card sc"><table><tr><th>Course</th><th>By</th><th>Status</th><th></th></tr>${D.courses.map(c=>`<tr><td>${esc(c.title)}</td><td>${esc(UN(c.by))}</td><td><span class="badge ${c.status==='approved'?'ok':'wait'}">${c.status}</span></td><td>${c.status==='pending'?`<button class="btn sm" onclick="setSt('${c.id}','approved')">Approve</button> `:''}<button class="btn sm alt" onclick="go('manage','${c.id}')">Edit</button> <button class="btn sm bad" onclick="rmCourse('${c.id}')">Remove</button></td></tr>`).join('')}</table></div>
+ ${pend.length?`<p class="mu">${pend.length} course(s) waiting for approval.</p>`:''}<h3 style="margin-top:18px">Users</h3><div class="card sc"><table><tr><th>Name</th><th>Email</th><th>Role</th><th></th></tr>${D.users.map(u=>`<tr><td>${esc(u.name)}</td><td>${esc(u.email)}</td><td>${u.role}</td><td><button class="btn sm bad" onclick="rmUser('${u.id}')">Remove</button></td></tr>`).join('')}</table></div>
+ <h3 style="margin-top:18px">Recent activity</h3><div class="card">${D.log.map(l=>`<div class="mu">${esc(l.t)} — ${esc(l.m)}</div>`).join('')}</div>`}};
+/* ===== v2 upgrade ===== */
+const stars=n=>'★'.repeat(n)+'☆'.repeat(5-n),avg=id=>{const r=(D.rev||[]).filter(x=>x.c===id);return r.length?(r.reduce((a,x)=>a+x.n,0)/r.length).toFixed(1):null};
+function eye(){const p=$('#p'),s=p.type==='password';p.type=s?'text':'password';$('#eye').textContent=s?'Hide':'Show'}
+const fill=(e,p)=>{$('#e').value=e;$('#p').value=p};
+const pwf=l=>`<label for="p">${l}</label><div class="pw"><input id="p" type="password" autocomplete="current-password"><button type="button" id="eye" class="eye" onclick="eye()" aria-label="Show or hide password">Show</button></div>`;
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&V.n==='auth'&&typeof window[V.p]==='function')window[V.p]()});
+function rate(id){D.rev=(D.rev||[]).filter(x=>!(x.c===id&&x.u===me.id));D.rev.push({c:id,u:me.id,n:+$('#rn').value,t:$('#rt').value.trim()});save();T('Review saved');render()}
+function addHoverEffects(){
+ document.querySelectorAll('#nav a,#nav button,#app .card,#app .btn,#app button,#app input,#app select,#app textarea,#app .chip,#app .les,#app .badge').forEach(el=>el.classList.add('zoomable'));
+}
+render=function(){
+ $('#nav').innerHTML=`<a class="logo zoomable" onclick="go('home')">✦ Classroom</a><span class="sp"></span><a class="zoomable" onclick="go('home')">Courses</a><a class="zoomable" onclick="go('about')">Project</a>${me?`<a class="zoomable" onclick="go('dash')">Dashboard</a>${me.role==='student'?`<a class="zoomable" onclick="go('certificates')">Certificates</a>`:''}<span class="badge zoomable">${me.role}</span><a class="zoomable" onclick="out()">Log out</a>`:`<a class="btn sm zoomable" onclick="go('auth','login')">Log in</a>`}`;
+ $('#app').innerHTML=(VIEWS[V.n]||VIEWS.home)(V.p);
+ addHoverEffects();
+ if(V.n==='home'){sky();grid();addHoverEffects()}
+};
+function sky(){const cv=$('#cv');if(!cv)return;const x=cv.getContext('2d'),dpr=devicePixelRatio||1,W=cv.clientWidth,H=cv.clientHeight,red=matchMedia('(prefers-reduced-motion:reduce)').matches;cv.width=W*dpr;cv.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);
+ const P=[...Array(80)].map(()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,r:Math.random()*1.5+.4}));
+ const N=[['Courses',.66,.26,D.courses.filter(c=>c.status==='approved').length],['Students',.88,.5,D.users.filter(u=>u.role==='student').length],['Instructors',.72,.8,D.users.filter(u=>u.role==='instructor').length],['Progress',.5,.55,D.enrol.length]].map(n=>({l:n[0],x:n[1]*W,y:n[2]*H,v:n[3]}));
+ let mx=-999,my=-999;cv.onmousemove=e=>{const r=cv.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top};cv.onmouseleave=()=>mx=-999;
+ (function f(t){if(!cv.isConnected)return;x.clearRect(0,0,W,H);
+ P.forEach(p=>{if(!red){p.x=(p.x+p.vx+W)%W;p.y=(p.y+p.vy+H)%H}});
+ P.forEach((a,i)=>{x.fillStyle='rgba(255,255,255,.7)';x.beginPath();x.arc(a.x,a.y,a.r,0,7);x.fill();for(let j=i+1;j<P.length;j++){const b=P[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<95){x.strokeStyle=`rgba(139,92,246,${.35*(1-d/95)})`;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}}const m=Math.hypot(a.x-mx,a.y-my);if(m<130){x.strokeStyle=`rgba(34,211,238,${.6*(1-m/130)})`;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(mx,my);x.stroke()}});
+ x.strokeStyle='rgba(251,191,36,.5)';x.lineWidth=1.5;x.beginPath();N.forEach((n,i)=>i?x.lineTo(n.x,n.y):x.moveTo(n.x,n.y));x.closePath();x.stroke();x.lineWidth=1;
+ N.forEach((n,i)=>{const hot=Math.hypot(n.x-mx,n.y-my)<40,pu=red?0:Math.sin(t/500+i*2)*3;x.shadowColor='#fbbf24';x.shadowBlur=hot?34:18;x.fillStyle='#fbbf24';x.beginPath();x.arc(n.x,n.y,(hot?11:8)+pu,0,7);x.fill();x.shadowBlur=0;x.fillStyle='#fff';x.font='700 13px Manrope,sans-serif';x.textAlign='center';x.fillText(n.l+' · '+n.v,n.x,n.y-18)});
+ requestAnimationFrame(f)})(0)}
+VIEWS.home=()=>{const cats=['All',...new Set(D.courses.filter(c=>c.status==='approved').map(c=>c.cat))];return`<section class="hero2"><canvas id="cv" aria-label="Constellation of courses, students, instructors and progress"></canvas><div class="ht"><h1>Learn in one place. Earn credentials that prove your progress.</h1><p>Create, manage and take online courses. Enrol in one click, complete your lessons and final assessment, and automatically receive a professional academy certificate.</p><p><a class="btn am" onclick="go('${me?'dash':'auth\',\'signup'}')">${me?'Open my dashboard':'Start learning free'}</a> <a class="btn alt" onclick="go('about')">See the project</a></p></div></section><h2>Course catalog</h2><input id="s" placeholder="Search courses" value="${esc(Q)}" oninput="Q=this.value;grid()" aria-label="Search courses"><div class="chips">${cats.map(c=>`<span class="chip ${c===CAT?'on':''}" onclick="setCat('${esc(c)}')">${esc(c)}</span>`).join('')}</div><div class="grid" id="grid"></div>`};
+VIEWS.auth=m=>{const t=`<div class="tabs">${['login','signup','reset'].map(k=>`<a class="${m===k?'on':''}" onclick="go('auth','${k}')">${{login:'Log in',signup:'Sign up',reset:'Reset password'}[k]}</a>`).join('')}</div>`;
+ return`<div class="card" style="max-width:440px;margin:30px auto"><h2>${m==='login'?'Welcome back':m==='signup'?'Join Classroom':'Reset your password'}</h2>${t}${m==='signup'?'<label for="n">Full name</label><input id="n" autocomplete="name">':''}<label for="e">Email</label><input id="e" type="email" autocomplete="email">${pwf(m==='reset'?'New password':'Password')}${m==='signup'?'<label for="r">I am a</label><select id="r"><option value="student">Student</option><option value="instructor">Instructor</option></select>':''}<button onclick="${m}()">${m==='login'?'Log in':m==='signup'?'Create account':'Save new password'}</button>${m==='login'?`<p class="mu">Try a demo account:</p><div class="row"><span class="badge demo" onclick="fill('student@demo.com','learn123')">Student</span><span class="badge demo" onclick="fill('teacher@demo.com','teach123')">Instructor</span><span class="badge demo" onclick="fill('admin@demo.com','admin123')">Admin</span></div>`:''}</div>`};
+const oc=VIEWS.course;VIEWS.course=id=>{const c=C(id);if(!c)return oc(id);const r=(D.rev||[]).filter(x=>x.c===id),a=avg(id),e=me&&E(me.id,id);return oc(id)+`<h3 style="margin-top:24px">Ratings and reviews ${a?`<span class="badge ok">★ ${a} (${r.length})</span>`:''}</h3>${e?`<div class="card"><label for="rn">Your rating</label><select id="rn">${[5,4,3,2,1].map(n=>`<option value="${n}">${stars(n)}</option>`).join('')}</select><label for="rt">Comment</label><input id="rt"><button onclick="rate('${id}')">Save review</button></div>`:''}${r.map(x=>`<div class="card" style="margin-top:8px"><b>${esc(UN(x.u))}</b> <span style="color:var(--am)">${stars(x.n)}</span><div class="mu">${esc(x.t||'')}</div></div>`).join('')||'<p class="mu">No reviews yet. Enrolled students can add the first one.</p>'}`};
+function skymap(id){const c=C(id),e=me&&E(me.id,id);if(!e)return'';const n=c.lessons.length+1,pts=[...Array(n)].map((_,i)=>[40+i*(520/Math.max(n-1,1)),60+Math.sin(i*1.7)*34]),on=i=>i<n-1?e.done.includes(i):e.passed;
+ return`<div class="card sky"><svg viewBox="0 0 600 120" role="img" aria-label="Your progress as a constellation"><polyline fill="none" stroke="rgba(255,255,255,.3)" stroke-dasharray="4 5" points="${pts.map(p=>p.join(',')).join(' ')}"/>${pts.map((p,i)=>`<g onclick="L=${i<n-1?i:-1};render()" style="cursor:pointer"><circle cx="${p[0]}" cy="${p[1]}" r="${i===n-1?13:9}" class="${on(i)?'st on':'st'}"/><text x="${p[0]}" y="${p[1]+(i%2?-18:30)}" text-anchor="middle" fill="#a0a8d6" font-size="11">${i<n-1?'Lesson '+(i+1):'Quiz'}</text></g>`).join('')}</svg></div>`}
+const ol=VIEWS.learn;VIEWS.learn=id=>skymap(id)+ol(id);
+const li=a=>a.map(x=>`<p style="margin:.3rem 0">• ${x}</p>`).join(''),sec=(t,b)=>`<h2 class="sec">${t}</h2>${b}`,cd=(h,b,i)=>`<div class="card">${i?`<div class="ft">${i}</div>`:''}<h3>${h}</h3>${b}</div>`;
+VIEWS.about=()=>`<div class="hero2" style="min-height:0"><div class="ht"><h1>Online Course Management</h1><p>A simple web platform to create, manage and take online courses in one place. Branch: CSE · Team of 4.</p></div></div>`+
+sec('Why we built this system',`<div class="grid g3">${cd('The problem',li(['Course details are scattered in many places','Enrolment and tracking are done by hand','Students cannot see their progress']))}${cd('Our solution',li(['One place for all courses and learners','Online enrolment in just one click','Auto progress tracking and certificates']))}</div><p class="mu">Goal: make learning simple, organised and available anytime.</p>`)+
+sec('Key features',`<div class="grid g3">${[['🔐','Secure Login','Separate logins for each user role'],['📚','Course Catalog','Browse, search and filter courses by category'],['⚡','Easy Enrolment','Join a course in one click and track it'],['🎬','Videos and Notes','Instructors upload lessons, notes and tasks'],['📝','Quizzes','Take quizzes and view progress reports'],['🏆','Certificates','Certificate is issued when a course is completed']].map(f=>cd(f[1],`<div class="mu">${f[2]}</div>`,f[0])).join('')}</div>`)+
+sec('Technology used',`<div class="grid g3">${cd('Frontend',li(['React + Vite','React Router for pages','Tailwind CSS for styling','Axios for API calls','Video player component']),'🖥️')}${cd('Backend',li(['Node.js + Express','JWT for secure login','bcrypt for passwords','Multer for file upload','Nodemailer for emails']),'⚙️')}${cd('Database',li(['MongoDB database','Mongoose data models','Users collection','Courses collection','Enrolments collection']),'🗄️')}</div><p class="mu">This live demo runs entirely in your browser and stores data locally. The stack above is the project's full production design.</p>`)+
+sec('How the system is connected',`<div class="arch"><div class="card"><b>React App</b><div class="mu">Pages for students, instructors and admin</div></div>→<div class="card"><b>Express API</b><div class="mu">Checks the token, then runs the task</div></div>→<div class="card"><b>MongoDB</b><div class="mu">Stores users, courses and enrolments</div></div></div><div class="grid g3" style="margin-top:14px">${[['/api/auth','Login, signup, reset'],['/api/courses','Create and browse'],['/api/enroll','Join and unenrol'],['/api/progress','Quizzes and results']].map(a=>cd(a[0],`<div class="mu">${a[1]}</div>`)).join('')}</div>`)+
+sec('How a student gets started',`<div class="grid g3">${[['Register','Create an account with email and password'],['Browse courses','Search and pick a course by category'],['Enrol','Join the course with one click'],['Learn','Watch videos, read notes, take quizzes'],['Get certificate','Finish the course and download it']].map((s,i)=>cd(`${i+1}. ${s[0]}`,`<div class="mu">${s[1]}</div>`)).join('')}</div><p class="mu">Before this: the instructor creates the course and the admin approves it for students.</p>`)+
+sec('What each user can do',`<div class="grid g3">${cd('Admin',li(['Approve or remove courses','Manage all users','View reports and counts','Monitor platform activity']),'🛡️')}${cd('Instructor',li(['Create and edit courses','Upload videos and notes','Create quizzes','See student progress']),'👩‍🏫')}${cd('Student',li(['Browse and enrol','Watch lessons anytime','Take quizzes','Download certificates']),'🎓')}</div><p class="mu">Certificate rule: a student gets a certificate after completing all lessons and passing the final quiz.</p>`)+
+sec('Our team',`<div class="grid g3">${[['Yeddala Sowmya Chandana','232U1A05J3'],['Sola Divya','232U1A05G2'],['Udayagiri Sai Prasanna','232U1A05I2'],['Thambi Meghana','232U1A05H0']].map(m=>`<div class="card"><div class="av">${m[0].split(' ').map(w=>w[0]).slice(0,3).join('')}</div><b>${m[0]}</b><div class="mu">${m[1]} · Branch: CSE</div></div>`).join('')}</div>`)+
+sec('Summary and future scope',`<div class="grid g3">${cd('What we achieved',li(['Courses, learners and quizzes in one app','Safe login with roles and tokens','Clear dashboards for each user','Progress tracking and certificates']))}${cd('Future ideas',li(['Online payments for paid courses','Live classes and chat','Mobile app version','Course ratings and reviews (already added in this demo)']))}</div><h3 style="margin-top:26px;text-align:center">Thank you. Questions are welcome.</h3>`);
+
+load();render();
+(function cursorFX(){
+ const g=document.createElement('div');g.className='cursor-glow';document.body.appendChild(g);
+ let raf=0,x=-300,y=-300;
+ document.addEventListener('mousemove',e=>{
+  x=e.clientX;y=e.clientY;
+  if(!raf)raf=requestAnimationFrame(()=>{g.style.left=x+'px';g.style.top=y+'px';raf=0});
+ });
+})();
+</script></body></html>
